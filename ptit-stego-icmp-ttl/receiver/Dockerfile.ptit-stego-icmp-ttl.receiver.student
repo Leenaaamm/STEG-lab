@@ -12,7 +12,7 @@
 #   openssl openssh-server openvpn wget tcpdump  update-inetd  xinetd
 #
 ARG registry
-FROM $registry/labtainer.base2
+FROM $registry/labtainer.network2
 #FROM $registry/labtainer.network
 #FROM $registry/labtainer.centos
 #FROM $registry/labtainer.lamp
@@ -34,10 +34,7 @@ ARG version
 LABEL version=$version
 ENV APT_SOURCE $apt_source
 RUN /usr/bin/apt-source.sh
-RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive apt install -y python3-pip || true && \
-    pip3 install scapy || python3 -m ensurepip && python3 -m pip install scapy
-#RUN apt update && apt install -y python3-pip && pip3 install scapy
+RUN apt update && apt install -y python3-pip && pip3 install scapy
 #
 #  put package installation here, e.g.,
 #     RUN apt-get update && apt-get install -y --no-install-recommends somepackage
